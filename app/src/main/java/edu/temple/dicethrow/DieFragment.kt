@@ -37,13 +37,16 @@ class DieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //When the view is first created, a number is randomly generated
         throwDie()
+        //When the TextView is clicked, the number will randomize again
         view.setOnClickListener{
             throwDie()
         }
     }
 
     fun throwDie() {
+        //Random.nextInt(dieSide) generates a number from 0-5
         dieTextView.text = (Random.nextInt(dieSides)+1).toString()
     }
 }
