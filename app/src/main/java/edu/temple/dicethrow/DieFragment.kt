@@ -11,9 +11,6 @@ import kotlin.random.Random
 const val DIESIDE = "sidenumber"
 
 class DieFragment : Fragment() {
-
-
-
     lateinit var dieTextView: TextView
 
     var dieSides: Int = 6

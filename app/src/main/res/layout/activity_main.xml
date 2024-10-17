@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--android:name="edu.temple.dicethrow.DieFragment"-->
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/dieContainer"
         android:layout_width="0dp"

@@ -17,7 +17,20 @@ class MainActivity : AppCompatActivity() {
             //Reference our already initialized fragmentContainer: dieContainer
             //However, this findFragmentById ONLY returns the generic Fragment
             //Thus, the methods in DieFragment cannot be accessed
-            (supportFragmentManager.findFragmentById(R.id.dieContainer) as DieFragment).throwDie()
+//            (supportFragmentManager.findFragmentById(R.id.dieContainer) as DieFragment).throwDie()
+
+
+            //Create a fragment
+            val fragCompanion = DieFragment.newInstance(20)
+
+            //Check if a fragment is already created in the fragmentContainer: dieContainer
+            if (supportFragmentManager.findFragmentById(R.id.dieContainer) !is DieFragment) {
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.dieContainer, fragCompanion)
+
+                    .commit()
+            }
         }
     }
 }
