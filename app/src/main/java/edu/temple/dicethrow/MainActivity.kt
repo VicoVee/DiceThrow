@@ -33,13 +33,19 @@ class MainActivity : AppCompatActivity() {
             // This is used to prevent multiple fragments from initializing
             // However, this means that our ROLL button will not work as intended,
             // since a new fragment will no longer be made, thus a new number is not shown.
-            if (supportFragmentManager.findFragmentById(R.id.dieContainer) !is DieFragment) {
-                //If no fragment is found, add the fragment to the fragmentContainer
-                supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.dieContainer, fragCompanion)
-                    .commit()
-            }
+//            if (supportFragmentManager.findFragmentById(R.id.dieContainer) !is DieFragment) {
+//                //If no fragment is found, add the fragment to the fragmentContainer
+//                supportFragmentManager
+//                    .beginTransaction()
+//                    .add(R.id.dieContainer, fragCompanion)
+//                    .commit()
+//            }
+
+            //Cheap and dirty way to replace the fragment lol
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.dieContainer, fragCompanion)
+                .commit()
         }
     }
 }
