@@ -25,5 +25,3 @@ class MainActivity : AppCompatActivity(), buttonInterface {
             .commit()
     }
 }
-
-//buttonFragment.buttonInterface

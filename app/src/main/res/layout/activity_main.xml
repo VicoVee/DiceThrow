@@ -9,8 +9,8 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/dieContainer"
-        android:layout_width="403dp"
-        android:layout_height="354dp"
+        android:layout_width="399dp"
+        android:layout_height="288dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".4"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,9 +18,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/buttonContainer"
+        android:name="edu.temple.dicethrow.fragment_btn"
         android:layout_width="277dp"
         android:layout_height="226dp"
-        android:layout_marginTop="68dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
