@@ -7,19 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [fragment_btn.newInstance] factory method to
- * create an instance of this fragment.
- */
+interface buttonInterface {
+    fun buttonClick()
+}
+
 class fragment_btn : Fragment() {
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,8 +20,11 @@ class fragment_btn : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_btn, container, false).apply {
             //Initialize the button
-            findViewById<Button>(R.id.button)
+            findViewById<Button>(R.id.button).setOnClickListener{
+                (activity as MainActivity).buttonClick()
+            }
         }
     }
 
 }
+
