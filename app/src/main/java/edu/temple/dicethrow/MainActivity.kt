@@ -8,13 +8,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
 
-//FRAGMENT COMMUNICATION 2 BRANCH
-class MainActivity : AppCompatActivity(), buttonInterface {
+//ViewModelTest BRANCH
+//fragment_btn.ButtonInterface
+class MainActivity : AppCompatActivity(), ButtonInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 
+    //When the button is clicked, add
     override fun buttonClick() {
         val fragCompanion = DieFragment()
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 
 
-interface buttonInterface {
+interface ButtonInterface {
     fun buttonClick()
 }
 
@@ -21,7 +21,14 @@ class fragment_btn : Fragment() {
         return inflater.inflate(R.layout.fragment_btn, container, false).apply {
             //Initialize the button
             findViewById<Button>(R.id.button).setOnClickListener{
-                (activity as MainActivity).buttonClick()
+                //Call the buttonClick function in the MainActivity
+                //Since activity is a FragmentActivity, we need to cast it to MainActivity
+                // (activity as MainActivity).buttonClick()
+
+                //To make it more generic, we can cast it to ButtonInterface
+                //As a result, we can use this fragment in other activities/projects since
+                //it no longer relies specifically on MainActivity (cohesion
+                (requireActivity() as ButtonInterface).buttonClick()
             }
         }
     }
