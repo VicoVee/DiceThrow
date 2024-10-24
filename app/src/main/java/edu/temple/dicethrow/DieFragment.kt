@@ -6,24 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import kotlin.random.Random
 
 // A key to retrieve the number of sides of the die
 const val DIESIDE = "sidenumber"
-const val ROLLSAVED = "rollValue" //Can make it local too, why not lol
 
 class DieFragment : Fragment() {
+    //Initialize ViewModel
+//    lateinit var dieViewModel: DieViewModel
+    //Alternative way to initialize ViewModel
+    val dieViewModel: DieViewModel by lazy {
+        ViewModelProvider(requireActivity())[DieViewModel::class.java]
+    }
+
     //Initializing the TextView
     lateinit var dieTextView: TextView
 
     // A default value for the sides of the die
     var dieSides: Int = 6
-    //Store the current roll
-    var rollValue : Int = 0
 
     // Sets up the DieFragment class AKA the constructor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Initialize the ViewModel
+        //dieViewModel = ViewModelProvider(requireActivity())[DieViewModel::class.java]
+
         //So when a DieFragment is created, check if there are any arguments and that it passes
         // a bundle. In this bundle, it will get the integer value of the die sides
         // Set the dieSide variable we have with the value in the bundle
@@ -34,12 +42,6 @@ class DieFragment : Fragment() {
         }
     }
 
-    //Saves the previous State/roll
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        //Save the roll value in outState bundle
-        outState.putInt(ROLLSAVED, rollValue)
-    }
 
     // Initialize our view. In this case, we have a single TextView that will display the number
     // Here, it is inflated and defined
@@ -59,17 +61,13 @@ class DieFragment : Fragment() {
     // throwDie(). Additionally, when the TextView is clicked, the number will randomize again
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //If this fragment is already made, then take the previous roll and save that in our rollValue
-        savedInstanceState?.run {
-            rollValue = getInt(ROLLSAVED)
 
+        dieViewModel.getRollValue().observe(requireActivity()) {
+            //When the rollValue is not 0, display the rollValue
+            dieTextView.text = it.toString()
         }
 
-        //When the rollValue is not 0, display the rollValue
-        if(rollValue != 0) {
-            dieTextView.text = rollValue.toString()
-        } else {
-            //Else generate a new roll
+        if (dieViewModel.getRollValue().value == null ) {
             throwDie()
         }
     }
@@ -78,17 +76,15 @@ class DieFragment : Fragment() {
     fun throwDie() {
         //Random.nextInt(dieSide) generates a number from 0-5
         //Adding 1 to the result will generate a number from 1-6
-        //Save the roll value
-        rollValue = (Random.nextInt(dieSides)+1)
-        //For a text view, convert the given integer to a string using toString()
-        dieTextView.text = rollValue.toString()
+        //Save the roll value in a LiveData object. This value can be observed by any activity
+        dieViewModel.setRollValue(Random.nextInt(dieSides) + 1)
     }
 
     // A companion object that creates a new instance of the DieFragment class,
     // Quick way to access our DieFragment constructor
-    companion object{
+    companion object {
         //Creating function newInstance, which will create a DieFragment object
-        fun newInstance(sides : Int): DieFragment{
+        fun newInstance(sides: Int): DieFragment {
             //Create a bundle to pass the number of sides
             val bundle = Bundle()
             bundle.putInt(DIESIDE, sides)

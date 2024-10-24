@@ -28,7 +28,7 @@ class fragment_btn : Fragment() {
                 //To make it more generic, we can cast it to ButtonInterface
                 //As a result, we can use this fragment in other activities/projects since
                 //it no longer relies specifically on MainActivity (cohesion
-                (requireActivity() as ButtonInterface).buttonClick()
+                (activity as ButtonInterface).buttonClick()
             }
         }
     }
