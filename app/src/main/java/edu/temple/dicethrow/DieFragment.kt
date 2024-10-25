@@ -36,12 +36,12 @@ class DieFragment : Fragment() {
         // a bundle. In this bundle, it will get the integer value of the die sides
         // Set the dieSide variable we have with the value in the bundle
         arguments?.let {
+            //[it] is the bundle
             it.getInt(DIESIDE).run {
                 dieSides = this
             }
         }
     }
-
 
     // Initialize our view. In this case, we have a single TextView that will display the number
     // Here, it is inflated and defined
@@ -63,11 +63,10 @@ class DieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         dieViewModel.getRollValue().observe(requireActivity()) {
-            //When the rollValue is not 0, display the rollValue
             dieTextView.text = it.toString()
         }
 
-        if (dieViewModel.getRollValue().value == null ) {
+        if (dieViewModel.getRollValue().value == null) {
             throwDie()
         }
     }

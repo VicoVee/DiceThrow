@@ -1,6 +1,7 @@
 package edu.temple.dicethrow
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,14 +17,17 @@ class MainActivity : AppCompatActivity(), ButtonInterface {
         setContentView(R.layout.activity_main)
     }
 
-    //When the button is clicked, add
+
+    //When the button is clicked
     override fun buttonClick() {
-        val fragCompanion = DieFragment()
+        Log.d("THROWDIE", "Button is Clicked")
+        val throwFrag = DieFragment()
 
         //Cheap and dirty way to replace the fragment lol
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.dieContainer, fragCompanion)
+            .replace(R.id.dieContainer, throwFrag)
             .commit()
+//        supportFragmentManager.(findFragmentById(R.id.dieContainer) as DieFragment)
     }
 }
