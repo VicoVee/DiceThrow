@@ -23,11 +23,17 @@ class MainActivity : AppCompatActivity(), ButtonInterface {
         Log.d("THROWDIE", "Button is Clicked")
         val throwFrag = DieFragment()
 
-        //Cheap and dirty way to replace the fragment lol
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.dieContainer, throwFrag)
-            .commit()
-//        supportFragmentManager.(findFragmentById(R.id.dieContainer) as DieFragment)
+        //Check if the fragment is initialized and in the dieContainer
+        if (supportFragmentManager.findFragmentById(R.id.dieContainer) == null) {
+            //If not initialized, then add fragment to container
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.dieContainer, throwFrag)
+                .commit()
+        } else {
+            //If there is already a fragment, simply call the throwDie function
+            //To change the die value on existing fragment
+            (supportFragmentManager.findFragmentById(R.id.dieContainer) as DieFragment).throwDie()
+        }
     }
 }
